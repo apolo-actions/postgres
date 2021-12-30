@@ -1,0 +1,69 @@
+kind: live
+name: Neu.ro PostgreSQL server
+author: Neu.ro MLOps team (Yevhenii Semendiak)
+descr: Run SQL DB server on Neu.ro platform with persistent storage.
+
+inputs:
+  db_dir_remote:
+    default: storage:postgres_data
+    descr: |
+      Reference to the backend volume, which to store DB data.
+  job_name:
+    default: postgres
+    descr: |
+      The name of PostgreSQL server.
+      Use it to generate a predictable job hostname.
+  preset:
+    default: ""
+    type: str
+    descr: |
+      The resource preset to use while running Postgres job.
+  http_auth:
+    default: False
+    type: bool
+    descr: |
+      Enable platform provided HTTP authentication for Postgres job.
+  life_span:
+    default: 30d
+    type: str
+    descr: |
+      The amount of time to run DB job container.
+  db_version:
+    default: 14
+    type: str
+    descr: |
+      PostgreSQL server version, used as an image tag.
+      Checkout list of available tags at https://hub.docker.com/_/postgres?tab=tags. 
+  db_user:
+    default: postgres
+    descr: |
+      Password to the DB, will be used as Job ENV variable.
+      Do not use the default value, instead consider Neu.ro secret: usage.
+  db_password:
+    default: password
+    descr: |
+      Password to the DB, will be used as Job ENV variable.
+      Do not use the default value, instead consider Neu.ro secret: usage.
+  postgres_initdb_args:
+    default: ""
+    type: str
+    descr: |
+      This optional environment variable can be used to send arguments to `postgres initdb`.
+      The value is a space separated string of arguments as `postgres initdb` would expect them.
+
+
+job:
+  image: postgres:${{ inputs.db_version }}
+  name: ${{ inputs.job_name }}
+  preset: ${{ inputs.preset }}
+  http_port: 5432
+  http_auth: ${{ inputs.http_auth }}
+  life_span: ${{ inputs.life_span }}
+  detach: True
+  volumes:
+    - ${{ inputs.db_dir_remote }}:/var/lib/postgresql/data:rw
+  env:
+    POSTGRES_USER: ${{ inputs.db_user }}
+    POSTGRES_PASSWORD: ${{ inputs.db_password }}
+    POSTGRES_INITDB_ARGS: ${{ inputs.postgres_initdb_args }}
+    PGDATA: /var/lib/postgresql/data/pgdata

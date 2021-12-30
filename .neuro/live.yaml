@@ -1,0 +1,13 @@
+kind: live
+title: Postgres
+
+volumes:
+  postgres:
+    remote: storage:postgres
+    mount: /project
+
+jobs:
+  postgres:
+    action: gh:neuro-actions/postgres@v1.0.0
+    args:
+      db_dir_remote: ${{ volumes.postgres.remote }}
