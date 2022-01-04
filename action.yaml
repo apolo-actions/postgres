@@ -27,11 +27,6 @@ inputs:
     type: str
     descr: |
       The resource preset to use while running Postgres job.
-  http_auth:
-    default: False
-    type: bool
-    descr: |
-      Enable platform provided HTTP authentication for Postgres job.
   life_span:
     default: 30d
     type: str
@@ -55,7 +50,7 @@ job:
   name: ${{ inputs.job_name }}
   preset: ${{ inputs.preset }}
   http_port: 5432
-  http_auth: ${{ inputs.http_auth }}
+  http_auth: True
   life_span: ${{ inputs.life_span }}
   detach: True
   volumes:
