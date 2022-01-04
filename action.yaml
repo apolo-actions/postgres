@@ -47,8 +47,7 @@ inputs:
     default: ""
     type: str
     descr: |
-      This optional environment variable can be used to send arguments to `postgres initdb`.
-      The value is a space separated string of arguments as `postgres initdb` would expect them.
+      This optional input is a separated string of arguments, which are sent to `postgres initdb`.
 
 
 job:

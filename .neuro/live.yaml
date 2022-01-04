@@ -8,6 +8,6 @@ volumes:
 
 jobs:
   postgres:
-    action: gh:neuro-actions/postgres@v1.0.0
+    action: ws:action.yaml
     args:
       db_dir_remote: ${{ volumes.postgres.remote }}

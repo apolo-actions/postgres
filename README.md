@@ -107,4 +107,4 @@ This is a [`neuro-flow`](https://github.com/neuro-inc/neuro-flow) action launchi
 # Known issues
 ### `chmod: changing permissions of '...': Operation not permitted`
 This might happen if the platform `storage:` backend does not support such an operation (happened with Azure Files and CIFS).
-A work-around for this is to use a platform `disk:` to host the SQLite data.
+A work-around for this is to use a platform `disk:` to host the Postgres data.
