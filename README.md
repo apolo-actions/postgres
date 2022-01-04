@@ -6,105 +6,102 @@ This is a [`neuro-flow`](https://github.com/neuro-inc/neuro-flow) action launchi
 
 ## Arguments
 
-### `db_dir_remote`
-A place to store Postgres files.
-This should be either `storage:`, or `disk:`. 
 
-#### Example
-You can use platform storage as a backend.
-```yaml
-args:
-    db_dir_remote: storage:might/be/with/some/path
-```
-Or an example with the disk (using its name, or ID).
-Note, you cannot pass a disk internal path, since only entire disk could be mounted. 
-```yaml
-args:
-    db_dir_remote: disk:disk-e7440b1a-7d09-4a15-a237-02ec022e6c22
-```
+### Required
+
+- `db_user`
+
+    Postgres DB server username.
+    It's set as environment variable `POSTGRES_USER` within the server instance.
+
+    ```yaml
+    args:
+        db_user: "neu.ro"
+    ```
 
 
-### `job_name`
-Predictable subdomain name which replaces the job's ID in the full job URI. `""` by default (in this case, the job name will be [generated](https://neu-ro.gitbook.io/neuro-flow/reference/live-workflow-syntax#jobs.less-than-job-id-greater-than.name) by Neuro-Flow).
+- `db_password`
 
-#### Example
-```yaml
-args:
-    job_name: "postgres-server"
-```
+    Postgres DB server password.
+    It's set as environment variable `POSTGRES_PASSWORD` within the server instance.
+    Consider usage of [Neu.ro secrets](https://docs.neu.ro/core/working-with-the-platform/secrets).
 
-
-### `preset`
-Resource preset to use when running the Postgres job. `""` by default (i.e., the first preset specified in the `neuro config show` list will be used).
-
-#### Example
-```yaml
-args:
-    preset: cpu-small
-```
+    ```yaml
+    args:
+        db_password: "I@#PN$)9!"
+    ```
 
 
-### `http_auth`
-Boolean value specifying whether to use platform HTTP authentication for Postgres or not. `False` by default.
+- `db_dir_remote`
 
-#### Example
-Enable platform provided HTTP authentication for Postgres by setting this argument to True.
-```yaml
-args:
-    http_auth: True
-```
+    A place to store Postgres files.
+    This should be either `storage:`, or `disk:`. 
 
-
-### `life_span`
-A value specifying how long the Postgres server job should be running. `"10d"` by default.
-
-#### Example
-```yaml
-args:
-    life_span: 1d2h3m
-```
-
-
-### `db_version`
-PostgreSQL server version, used as an image tag. `14` by default.
-Checkout list of available tags [here](https://hub.docker.com/_/postgres?tab=tags).
-
-#### Examples
-```yaml
-args:
-    db_version: "12-bullseye"
-```
+    **Examples**:
+    
+    You can use platform storage as a backend.
+    ```yaml
+    args:
+        db_dir_remote: storage:might/be/with/some/path
+    ```
+    Or an example with the disk (using its name, or ID).
+    Note, you cannot pass a disk internal path, since only entire disk could be mounted. 
+    ```yaml
+    args:
+        db_dir_remote: disk:disk-e7440b1a-7d09-4a15-a237-02ec022e6c22
+    ```
 
 
-### `db_user`
-Postgres DB server username. `postgres` by default.
-It's set as environment variable `POSTGRES_USER` within the server instance.
+### Optional
+- `job_name`
 
-#### Examples
-```yaml
-args:
-    db_user: "neu.ro"
-```
+    Predictable subdomain name which replaces the job's ID in the full job URI. `""` by default (in this case, the job name will be [generated](https://neu-ro.gitbook.io/neuro-flow/reference/live-workflow-syntax#jobs.less-than-job-id-greater-than.name) by Neuro-Flow).
+
+    ```yaml
+    args:
+        job_name: "postgres-server"
+    ```
 
 
-### `db_password`
-Postgres DB server password. `password` by default.
-It's set as environment variable `POSTGRES_PASSWORD` within the server instance.
+- `preset`
 
-#### Examples
-```yaml
-args:
-    db_password: "I@#PN$)9!"
-```
+    Resource preset to use when running the Postgres job. `""` by default (i.e., the first preset specified in the `neuro config show` list will be used).
 
-### `postgres_initdb_args`
-Value of Postgress env var `POSTGRES_INITDB_ARGS`. Empty be default.
+    ```yaml
+    args:
+        preset: cpu-small
+    ```
 
-#### Example
-```yaml
-args:
-    POSTGRES_INITDB_ARGS: "--data-checksums"
-```
+
+- `life_span`
+
+    A value specifying how long the Postgres server job should be running. `"10d"` by default.
+
+    ```yaml
+    args:
+        life_span: 1d2h3m
+    ```
+
+
+- `db_version`
+
+    PostgreSQL server version, used as an image tag. `"14"` by default.
+    Checkout list of available tags [here](https://hub.docker.com/_/postgres?tab=tags).
+
+
+    ```yaml
+    args:
+        db_version: "12-bullseye"
+    ```
+
+- `postgres_initdb_args`
+
+    Value of Postgress env var `POSTGRES_INITDB_ARGS`. Empty be default.
+
+    ```yaml
+    args:
+        POSTGRES_INITDB_ARGS: "--data-checksums"
+    ```
 
 
 # Known issues

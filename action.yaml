@@ -4,6 +4,15 @@ author: Neu.ro MLOps team (Yevhenii Semendiak)
 descr: Run SQL DB server on Neu.ro platform with persistent storage.
 
 inputs:
+  db_user:
+    type: str
+    descr: |
+      Password to the DB, will be used as Job ENV variable.
+  db_password:
+    type: str
+    descr: |
+      Password to the DB, will be used as Job ENV variable.
+      Consider usage of Neu.ro secrets.
   db_dir_remote:
     default: storage:postgres_data
     descr: |
@@ -29,21 +38,11 @@ inputs:
     descr: |
       The amount of time to run DB job container.
   db_version:
-    default: 14
+    default: "14"
     type: str
     descr: |
       PostgreSQL server version, used as an image tag.
       Checkout list of available tags at https://hub.docker.com/_/postgres?tab=tags. 
-  db_user:
-    default: postgres
-    descr: |
-      Password to the DB, will be used as Job ENV variable.
-      Do not use the default value, instead consider Neu.ro secret: usage.
-  db_password:
-    default: password
-    descr: |
-      Password to the DB, will be used as Job ENV variable.
-      Do not use the default value, instead consider Neu.ro secret: usage.
   postgres_initdb_args:
     default: ""
     type: str
