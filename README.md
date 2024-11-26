@@ -1,6 +1,6 @@
-# Run your personal Postgres database server on the Neu.ro platform with neuro-flow
+# Run your personal Postgres database server on the Apolo platform with apolo-flow
 
-This is a [`neuro-flow`](https://github.com/neuro-inc/neuro-flow) action launching an instance of [Postgres SQL server](https://hub.docker.com/_/postgres).
+This is a [`apolo-flow`](https://github.com/neuro-inc/neuro-flow) action launching an instance of [Postgres SQL server](https://hub.docker.com/_/postgres).
 
 ## Usage example could be found in the [.neuro/live.yaml](.neuro/live.yaml) file.
 
@@ -16,7 +16,7 @@ This is a [`neuro-flow`](https://github.com/neuro-inc/neuro-flow) action launchi
 
     ```yaml
     args:
-        db_user: "neu.ro"
+        db_user: "postgres"
     ```
 
 
@@ -24,7 +24,7 @@ This is a [`neuro-flow`](https://github.com/neuro-inc/neuro-flow) action launchi
 
     Postgres DB server password.
     It's set as environment variable `POSTGRES_PASSWORD` within the server instance.
-    Consider usage of [Neu.ro secrets](https://docs.neu.ro/core/working-with-the-platform/secrets).
+    Consider usage of [Apolo secrets](https://docs.apolo.us/index/core/apps/pre-installed/secrets).
 
     ```yaml
     args:
@@ -55,7 +55,7 @@ This is a [`neuro-flow`](https://github.com/neuro-inc/neuro-flow) action launchi
 ### Optional
 - `job_name`
 
-    Predictable subdomain name which replaces the job's ID in the full job URI. `""` by default (in this case, the job name will be [generated](https://neu-ro.gitbook.io/neuro-flow/reference/live-workflow-syntax#jobs.less-than-job-id-greater-than.name) by Neuro-Flow).
+    Predictable subdomain name which replaces the job's ID in the full job URI. `""` by default (in this case, the job name will be [generated](https://docs.apolo.us/apolo-flow-reference/workflow-syntax/live-workflow-syntax#jobs.less-than-job-id-greater-than.name) by `apolo-flow`).
 
     ```yaml
     args:
@@ -65,7 +65,7 @@ This is a [`neuro-flow`](https://github.com/neuro-inc/neuro-flow) action launchi
 
 - `preset`
 
-    Resource preset to use when running the Postgres job. `""` by default (i.e., the first preset specified in the `neuro config show` list will be used).
+    Resource preset to use when running the Postgres job. `""` by default (i.e., the first preset specified in the `apolo config show` list will be used).
 
     ```yaml
     args:

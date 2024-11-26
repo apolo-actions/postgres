@@ -1,7 +1,7 @@
 kind: live
-name: Neu.ro PostgreSQL server
-author: Neu.ro MLOps team (Yevhenii Semendiak)
-descr: Run SQL DB server on Neu.ro platform with persistent storage.
+name: PostgreSQL server
+author: MLOps team
+descr: Run SQL DB server on Apolo platform with persistent storage.
 
 inputs:
   db_user:
@@ -12,7 +12,7 @@ inputs:
     type: str
     descr: |
       Password to the DB, will be used as Job ENV variable.
-      Consider usage of Neu.ro secrets.
+      Consider usage of Apolo secrets.
   db_dir_remote:
     default: storage:postgres_data
     descr: |
@@ -37,13 +37,12 @@ inputs:
     type: str
     descr: |
       PostgreSQL server version, used as an image tag.
-      Checkout list of available tags at https://hub.docker.com/_/postgres?tab=tags. 
+      Checkout list of available tags at https://hub.docker.com/_/postgres?tab=tags.
   postgres_initdb_args:
     default: ""
     type: str
     descr: |
       This optional input is a separated string of arguments, which are sent to `postgres initdb`.
-
 
 job:
   image: postgres:${{ inputs.db_version }}
